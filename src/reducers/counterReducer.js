@@ -1,8 +1,8 @@
-const object = {
+const initialState = {
   count: 0
 };
 
-export const counterReducer = (state = object, action) => {
+export const counterReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT':
       return { ...state, count: state.count + 1 };

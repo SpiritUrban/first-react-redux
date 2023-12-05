@@ -1,8 +1,17 @@
 // src/store.js
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer);
+// Настройка Redux DevTools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    rootReducer,
+    /* preloadedState, */
+    composeEnhancers(
+        applyMiddleware(/* здесь могут быть ваши middleware, например, thunk */)
+    )
+);
 // другие настройки хранилища
 
 
