@@ -5,6 +5,10 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, resetCounter } from './actions/counterActions';
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import AuthPage from "./pages/AuthPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 const Navigation = ({ links }) => {
@@ -35,36 +39,14 @@ function App() {
     // Добавьте больше ссылок по необходимости
   ];
 
-
   return (
-
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <Navigation links={links} />
-
-        <h1>Count: {count}</h1>
-        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
-        <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
-        <hr />
-        <button onClick={() => dispatch(increment())}>Increment</button>
-        <button onClick={() => dispatch(decrement())}>Decrement</button>
-        <button onClick={() => dispatch(resetCounter())}>resetCounter</button>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
-      </header>
-    </div>
-
-
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
   );
 }
 
