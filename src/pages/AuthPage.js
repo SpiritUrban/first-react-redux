@@ -1,45 +1,55 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginAction } from '../actions/authActions';
+
+const initialState = {
+    email: '',
+    password: ''
+};
+
+function reducer(state, action) {
+    return {
+        ...state,
+        [action.field]: action.value
+    };
+}
 
 function AuthPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // try {
-    //     const response = await fetch('/api/auth/login', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({ email, password }),
-    //     });
-    //     const data = await response.json();
-    //     // Обработка полученных данных
-    //   } catch (error) {
-    //     // Обработка ошибок
-    //   }
-  };
+    const [state, dispatchState] = useReducer(reducer, initialState);
+    const { email, password } = state;
+    const dispatch = useDispatch();
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="email" 
-          value={email} 
-          onChange={e => setEmail(e.target.value)} 
-          placeholder="Email" 
-        />
-        <input 
-          type="password" 
-          value={password} 
-          onChange={e => setPassword(e.target.value)} 
-          placeholder="Password" 
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+    const handleChange = (e) => {
+        dispatchState({ field: e.target.name, value: e.target.value });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        dispatch(loginAction(email, password));
+    };
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                />
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    );
 }
 
 export default AuthPage;
