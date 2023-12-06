@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../actions/authActions';
+// import { log } from '../lib/utils';
 
 const initialState = {
     email: '',
@@ -26,6 +27,7 @@ function AuthPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        // log(email, password);
         dispatch(loginAction(email, password));
     };
 
