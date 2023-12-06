@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginAction } from '../actions/authActions';
 
 const initialState = {

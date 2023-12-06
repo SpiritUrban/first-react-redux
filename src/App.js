@@ -39,6 +39,13 @@ function App() {
     // Добавьте больше ссылок по необходимости
   ];
 
+  // Пример запроса на получение пользователей
+  fetch('/api/users')
+    .then(response => response.json())
+    .then(data => console.log('mock:', data))
+    .catch(error => console.error('Ошибка:', error));
+
+
   return (
     <Router>
       <Routes>

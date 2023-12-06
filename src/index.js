@@ -5,6 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
+import { makeServer } from './server';
+
+if (process.env.NODE_ENV === 'development') {
+  makeServer(); // Запуск Mirage JS в режиме разработки
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
