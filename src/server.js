@@ -1,4 +1,3 @@
-// src/server.js
 import { createServer, Model } from 'miragejs';
 
 export function makeServer({ environment = 'development' } = {}) {
@@ -33,7 +32,6 @@ export function makeServer({ environment = 'development' } = {}) {
                 }
             });
 
-            // Добавьте здесь другие маршруты, если необходимо
         },
     });
 
